@@ -1,0 +1,7 @@
+﻿dotnet ef dbcontext scaffold "server =(local); database = AuthorInstitution2023DB;uid=sa;pwd=12345;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models
+
+dotnet add package Microsoft.Extensions.Configuration --version 6.0.0
+dotnet add package Microsoft.Extensions.Configuration.Json --version 6.0.0
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 6.0.18
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.18
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0.18

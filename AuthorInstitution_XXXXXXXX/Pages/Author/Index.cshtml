@@ -1,0 +1,98 @@
+﻿@page
+@model AuthorInstitution_XXXXXXXX.Pages.Author.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form asp-page="index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <select asp-for="SearchField" asp-items="ViewBag.SearchField"></select>
+            <input asp-for="SearchString" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="index">Back to full list</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrespondingAuthor[0].AuthorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrespondingAuthor[0].AuthorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrespondingAuthor[0].AuthorBirthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrespondingAuthor[0].Bio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrespondingAuthor[0].Skills)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrespondingAuthor[0].Institution)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CorrespondingAuthor)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorBirthday)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Skills)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Institution.InstitutionName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.AuthorId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.AuthorId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.AuthorId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.CorrespondingAuthor.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.CorrespondingAuthor.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="index"
+   asp-route-pageIndex="@(Model.CorrespondingAuthor.PageIndex - 1)"
+   asp-route-SearchString="@Model.SearchString"
+   asp-route-SearchField="@Model.SearchField"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="index"
+   asp-route-pageIndex="@(Model.CorrespondingAuthor.PageIndex + 1)"
+   asp-route-SearchString="@Model.SearchString"
+   asp-route-SearchField="@Model.SearchField"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
